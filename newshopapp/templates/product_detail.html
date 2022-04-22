@@ -1,0 +1,95 @@
+
+{% extends "myparent.html" %}
+
+{% load static %}
+
+{% block title %}
+<title>Product Detail - Apparel Shopping</title>
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="products">
+    <div class="container">
+        <div class="single-page">
+            <div class="single-page-row" id="detail-21">
+                <div class="col-md-6 single-top-left">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            {% if productdetaildata %}
+
+                            <li data-thumb={{ productdetaildata.product_image1.url }}>
+                                <div class="thumb-image detail_images"> <img src={{ productdetaildata.product_image1.url }} data-imagezoom="true" class="img-responsive" alt=""> </div>
+                            </li>
+                            <li data-thumb={{ productdetaildata.product_image2.url }}>
+                                <div class="thumb-image detail_images"> <img src={{ productdetaildata.product_image2.url }} data-imagezoom="true" class="img-responsive" alt=""> </div>
+                            </li>
+                            <li data-thumb={{ productdetaildata.product_image3.url }}>
+                                <div class="thumb-image detail_images"> <img src={{ productdetaildata.product_image3.url }} data-imagezoom="true" class="img-responsive" alt=""> </div>
+                            </li>
+
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 single-top-right">
+                    <h3 class="item_name"> {% if productdetaildata %} {{ productdetaildata.productname }} {% endif %}</h3>
+                    <p>Processing Time: Item will be shipped out within 2-3 working days. </p>
+                    <form action="{% url 'addtocart' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="single-price">
+                        <ul>
+                            <li>Rs.{% if discountedprice %} {{ discountedprice }} {% endif %}/-</li>
+                            <li><del>Rs.{% if productdetaildata %} {{ productdetaildata.price }} {% endif %}/-</del></li>
+                            <li><span class="w3off">{% if productdetaildata %} {{ productdetaildata.discount }} {% endif %}% OFF</span></li>
+                            <br><li><span class="ftext">Qty
+                            <select name="quantity">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="single-price-text">{% if productdetaildata %} {{ productdetaildata.productdescription|safe}} {% endif %} </p>
+
+                        <input type="hidden" name="sessionid" value="{{ request.session.session_key }}" />
+                        <input type="hidden" name="productid" value="{{ productdetaildata.id }}" />
+                        <input type="hidden" name="discountedrate" value="{{ discountedprice }}"/>
+                        <button type="submit" class="w3ls-cart">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
+
+                    </form>
+                    <button class="w3ls-cart w3ls-cart-like"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</button>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+<script>
+	// Can also be used with $(document).ready()
+	$(window).load(function() {
+	  $('.flexslider').flexslider({
+		animation: "slide",
+		controlNav: "thumbnails"
+	  });
+	});
+</script>
+<!--flex slider-->
+
+<script src="{% static 'js/imagezoom.js' %}"></script>
+{% endblock %}
+</body>
+</html>

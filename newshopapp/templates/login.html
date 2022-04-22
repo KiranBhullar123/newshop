@@ -1,0 +1,33 @@
+{% extends "myparent.html" %}
+
+{% load static %}
+
+{% block title %}
+<title>Fashion Club an Ecommerce Online Shopping Category  Flat Bootstrap responsive Website Template | Home :: w3layouts</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="login">
+
+		<div class="main-agileits">
+				<div class="form-w3agile">
+					<h3>Login</h3>
+					<table class="table">
+					<form action="#" method="post">
+						{% csrf_token %}
+						{{ meraloginform.as_table }}
+						<input type="hidden" name="next" value="{{ request.GET.next }}"/>
+						<tr><td></td><td><input type="submit" value="Login"></td></tr>
+					</form>
+					</table>
+				</div>
+				<div class="forg">
+
+					<a href="{% url 'usersignup' %}" class="forg-right">Register</a>
+				<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
+

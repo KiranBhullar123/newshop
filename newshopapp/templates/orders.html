@@ -1,0 +1,59 @@
+{% extends "myparent.html" %}
+
+{% load static %}
+
+{% block title %}
+
+<title>Order History - Apparel Shopping</title>
+{% endblock %}
+
+{% block content %}
+<div class="top-products">
+    <div class="container">
+        <h3>Order History</h3>
+
+        <table class="table">
+            <tbody>
+            {% if ordersdata %}
+
+            <thead>
+
+            <th style="text-align:center">Order No</th>
+            <th style="text-align:center">Name</th>
+            <th style="text-align:center">Email ID</th>
+            <th style="text-align:center">Phone</th>
+            <th style="text-align:center">Address</th>
+            <th style="text-align:center">Zip Code</th>
+            <th style="text-align:center">Total Amount</th>
+            <th style="text-align:center">Payment Mode</th>
+            <th style="text-align:center">Order Status</th>
+            <th style="text-align:center">Order Details</th>
+            </thead>
+            {% for data in ordersdata %}
+
+            <tr>
+                <td><h4>{{ data.id }}</h4></td>
+                <td><h4>{{ data.name }}</h4></td>
+
+                <td><h4>{{ data.email }}</h4></td>
+                <td><h4>{{ data.phone }}</h4></td>
+                <td><h4>{{ data.address }}</h4></td>
+                <td><h4>{{ data.zipcode }}</h4></td>
+                <td><h4>Rs.{{ data.total_amount }}/-</h4></td>
+                <td><h4>{{ data.payment_mode }}</h4></td>
+                <td><h4>{{ data.order_status }}</h4></td>
+                <td><h4><a href="{% url 'orderdetails' data.id %}">Details</a></h4></td>
+            </tr>
+
+            {% endfor %}
+
+
+            {% else %}
+            <h4>No Previous Orders available</h4>
+            {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "myparent.html" %}
+{% load static %}
+{% block title %}
+<title>Order History - Apparel Shopping</title>
+{% endblock %}
+
+{% block content %}
+<div class="top-products">
+    <div class="container">
+        <h3>Order History</h3>
+        {% if orderdetailsdata %}
+
+        <h2 align="left">Order No. {{ orderdetailsdata.orderno }}</h2></td>
+        <h2 align="left">Order Date {{ orderdetailsdata.orderdate }}</h2></td>
+        <table class="table">
+            <tbody>
+
+
+            <thead>
+
+
+            <th></th>
+            <th style="text-align:center">Product</th>
+            <th style="text-align:center">Qty</th>
+            <th style="text-align:center">Price</th>
+            <th style="text-align:center">Total Cost</th>
+
+            </thead>
+
+            {% for data in orderdetailsdata %}
+
+
+            <tr>
+
+                <td><img src="{{ data.product.product_image1.url }}" style="width:50px"></td>
+                <td><h4>{{ data.product.productname }}</h4></td>
+                <td><h4>{{ data.qty }}</h4></td>
+                <td><h4>Rs.{{ data.discountedrate }}/-</h4></td>
+                <td><h4>Rs.{{ data.totalcost }}/-</h4></td>
+
+            </tr>
+            {% endfor %}
+
+
+            {% else %}
+            <h4>No Previous Orders available</h4>
+            {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

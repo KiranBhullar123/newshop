@@ -1,0 +1,8 @@
+{% for category in categories %}
+
+    <li><a href="{% url 'subcategories' category.id %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{ category | upper }}</a></li>
+
+{% endfor %}
+{% if categories %}
+    Total Categories {{ categories | length }}
+{% endif %}

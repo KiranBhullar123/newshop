@@ -1,0 +1,57 @@
+{% extends "myparent.html" %}
+
+{% load static %}
+
+{% block title %}
+<title>Checkout - Apparel Shopping</title>
+{% endblock %}
+
+{% block content %}
+<div class="sub-banner">
+</div>
+<div class="contact">
+	<div class="container">
+		<h3>CHECKOUT</h3>
+		<div class="col-md-6 col-sm-6 contact-left">
+			<form action="{% url 'order' %}" method="post">
+				{% csrf_token %}
+				<input type="text" name="name" placeholder="Your NAME" required=" ">
+				<input type="text" name="email" placeholder="Your EMAIL" required=" ">
+                <input type="text" name="phone" placeholder="PHONE" required=" ">
+				<input type="text" name="zipcode" placeholder="ZIP CODE" required=" ">
+				<textarea  name="address" placeholder="ADDRESS" required=" "></textarea>
+				 Payment Mode <br><input type="radio" name="paymentmode" value="wallet">Paytm on 983984344<br>
+                <input type="radio" name="paymentmode" value="bank">Bank Deposit<br>
+				<input type="hidden" name="totalcost" value="{{ cartsum.totalcost__sum }}">
+				<input type="submit" value="CHECKOUT">
+			</form>
+		</div>
+		<h4 style="text-align:left">Products in cart</h4>
+		<div class="col-md-6 col-sm-6 contact-right">
+			 {% for data in cartdata %}
+                <ul>
+                    <li>
+                <img src="{{ data.product.product_image1.url }}" style="width:50px"><br>
+                {{ data.product.productname }}<br>
+                Qty : {{ data.qty }}<br>
+                Rs.{{ data.totalcost }}/-
+                    </li>
+                </ul>
+
+            {% endfor %}
+
+		</div>
+
+	</div>
+</div>
+<div class="map-w3ls">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22702.22744502486!2d11.113366067229226!3d44.662878362361056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fc3eca9065c15%3A0x12ec8a03aadae866!2s40019+Sant&#39;Agata+Bolognese+BO%2C+Italy!5e0!3m2!1sen!2sin!4v1451281303075" allowfullscreen></iframe>
+</div>
+
+
+
+
+
+{% endblock %}
+</body>
+</html>
