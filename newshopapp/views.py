@@ -1,8 +1,7 @@
-import json
-import urllib
 
-import data as data
-from MySQLdb.constants.FIELD_TYPE import JSON
+
+
+
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -125,6 +124,7 @@ def checkout(request):
 
     return render(request, "checkout.html", {"cartdata": cartdata, "cartsum": cartsum})
 @login_required()
+
 def do_checkout(request):
     mycheckoutform = Orders()
     name = request.POST.get("name")
@@ -191,10 +191,14 @@ def my_login(request):
        return render(request, "login.html", {"meraloginform": myloginform})
 
 
+
 def showorders(request):
     userobj = User.objects.get(username=request.session["myname"])
     ordersdata = Orders.objects.filter(username=userobj)
+    print(ordersdata)
     return render(request, "orders.html", {"ordersdata": ordersdata})
+
+
 def showorderdetails(request, id):
     orderdetailsdata = OrderDetails.objects.filter(orderno=id)
     return render(request, "order-history.html", {"orderdetailsdata": orderdetailsdata})
