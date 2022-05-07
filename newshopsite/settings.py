@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-!v+rjh#1wjt0*a=wmh2f)uh5(ndj^o1%%pv*-04m9kp(#(d1l*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []#['django-newshop.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -132,9 +132,9 @@ USE_TZ = False
 STATIC_URL = 'static/'
 #STATIC_ROOT = (os.path.join(BASE_DIR, "staticfiles"), )
 
-#STATIC_FILES_DIRS = [
- #   os.path.join(BASE_DIR, 'newshopapp/static')
-#]
+STATIC_FILES_DIRS = [
+     os.path.join(BASE_DIR, 'newshopapp/static')
+]
 MEDIA_ROOT = os.path.join(BASE_DIR, "pictures") # for storing images in pictures directory
 
 MEDIA_URL = '/media/'   #for showing to public
@@ -153,7 +153,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER ="kjeetkaur497@gmail.com"
 EMAIL_HOST_PASSWORD = 'jit1234$#@!'
-API_KEY =""
+API_KEY ="b84272d5131501d877583ffc171c239d"
 
 
-#django_heroku.settings(locals())

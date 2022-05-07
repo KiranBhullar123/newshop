@@ -1,7 +1,5 @@
-
-
-
-
+import json
+import urllib
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -25,19 +23,20 @@ from newshopsite.settings import API_KEY
 
 
 def my_index(request):
-  #  source = urllib.request.urlopen(
-     #   'https://api.openweathermap.org/data/2.5/weather?q=Batala,In&appid=' + API_KEY + '&units=metric').read()
+    source = urllib.request.urlopen(
+        'https://api.openweathermap.org/data/2.5/weather?q=Batala,In&appid='+ API_KEY + '&units=metric').read()
      #converting JSON data to a dictionary
-  #  list_of_data = json.loads(source)
+    list_of_data = json.loads(source)
 
     #data for variable list_of_data
- #   data = {
-   #     "temp": str(list_of_data['main']['temp']),
-    #    "forecast": str(list_of_data['weather'][0]['description'])
-    #}
+    data = {
+       "temp": str(list_of_data['main']['temp']),
+       "forecast": str(list_of_data['weather'][0]['description'])
+    }
+
 
     categorydata = Category.objects.all()
-    return render(request, "index.html", {"mycategories": categorydata}) #,"tempdata": data})
+    return render(request, "index.html", {"mycategories": categorydata,"tempdata": data})
 
 def show_subcategories(request, cid):
     subcatdata = SubCategory.objects.filter(catid=cid)
@@ -100,11 +99,7 @@ def showcart(request):
     return render(request, "cart.html", {"cartdata": cartdata, "cartsum": cartsum})
 
 
-# def showcart(request):
-#     cartdata = Cart.objects.filter(sessionid=request.session.session_key)
-#     cartsum = Cart.objects.filter(sessionid=request.session.session_key).aggregate(Sum('totalcost'))
-#
-#     return render(request,"cart.html",{"cartdata":cartdata,"cartsum":cartsum})
+
 def deleteitemincart(request, pid):
     if not request.session or not request.session.session_key:
         sessionid = request.session.session_key
@@ -195,7 +190,8 @@ def my_login(request):
 def showorders(request):
     userobj = User.objects.get(username=request.session["myname"])
     ordersdata = Orders.objects.filter(username=userobj)
-    print(ordersdata)
+
+
     return render(request, "orders.html", {"ordersdata": ordersdata})
 
 
